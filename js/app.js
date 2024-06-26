@@ -63,6 +63,40 @@ const mapping = {
     "concave to plane": "Q23058598",
     "semi-spherical": "Q62023127",
   },
+  "whichGills": {
+    "adnate": "Q19887953",
+    "adnexed": "Q19887954",
+    "decurrent": "Q14544535",
+    "emarginate": "Q19887955",
+    "free": "Q19887957",
+    "seceding": "Q19887958",
+    "sinuate": "Q14544541",
+    "subdecurrent": "Q19887961",
+    "no": "Q19887962",
+  },
+  "sporePrintColor": {
+    "black": "TODO",
+    "blackish-brown": "TODO",
+    "brown": "TODO",
+    "buff": "TODO",
+    "cream": "TODO",
+    "green": "TODO",
+    "ochre": "TODO",
+    "olive": "TODO",
+    "olive-brown": "TODO",
+    "pink": "TODO",
+    "pinkish-brown": "TODO",
+    "purple": "TODO",
+    "purple-black": "TODO",
+    "purple-brown": "TODO",
+    "reddish-brown": "TODO",
+    "salmon": "TODO",
+    "tan": "TODO",
+    "white": "TODO",
+    "yellow": "TODO",
+    "yellow-orange": "TODO",
+    "yellow-brown": "TODO",
+  },
 }
 
 function appendChildText(main, text) {
@@ -71,7 +105,7 @@ function appendChildText(main, text) {
   main.appendChild(loadingText);
 }
 
-function toGalleryEntry(entry) {
+export function toGalleryEntry(entry) {
   const displayEntry = document.createElement("a");
   displayEntry.className = 'gallery';
   displayEntry.href = `https://wikipedia.org/wiki/${entry.itemLabel.value}`
@@ -89,14 +123,16 @@ function toGalleryEntry(entry) {
   return displayEntry;
 }
 
+const getParams = () => ({
+  "ecologicalType": document.getElementById('ecological-type').value,
+  "stipeCharacter": document.getElementById('stipe-character').value,
+  "hymeniumType": document.getElementById('hymenium-type').value,
+  "capShape": document.getElementById('cap-shape').value,
+});
+
 export const updateResults = (event) => {
   event.preventDefault();
-  const params = {
-    "ecologicalType": document.getElementById('ecological-type').value,
-    "stipeCharacter": document.getElementById('stipe-character').value,
-    "hymeniumType": document.getElementById('hymenium-type').value,
-    "capShape": document.getElementById('cap-shape').value,
-  };
+  const params = getParams();
   const main = document.getElementById('main');
   main.textContent = "";
   appendChildText(main, "Loading...");
@@ -108,4 +144,5 @@ export const updateResults = (event) => {
   return false;
 }
 
-document.getElementById('form').addEventListener("submit", updateResults);
+document.onload = () => document.getElementById('form').addEventListener("submit", updateResults);
+
