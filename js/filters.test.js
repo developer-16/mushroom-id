@@ -1,4 +1,4 @@
-import {prepareFilters} from "./filters.js";
+import {initializeFilters} from "./filters.js";
 
 test('should convert gallery entry to html', () => {
   document.body.innerHTML = `
@@ -10,7 +10,7 @@ test('should convert gallery entry to html', () => {
     <div class="dropend mb-2" id="sporePrintColor"></div>
   `
 
-  prepareFilters();
+  initializeFilters();
 
   expect(document.body.innerHTML).toEqual(`
     <div class="dropdown" id="hymeniumType">

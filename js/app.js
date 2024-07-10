@@ -1,16 +1,11 @@
 import {queryWithFilters} from "./mushroom-query.js";
 import {toGalleryEntry} from "./gallery-helper.js";
-import {prepareFilters} from "./filters.js";
+import {initializeFilters} from "./filters.js";
 
 const appendChildText = (main, text) => {
   const loadingText = document.createElement("p");
   loadingText.textContent = text;
   main.appendChild(loadingText);
-};
-
-const appendSpinner = (element) => {
-  element.innerHTML =
-    `<p>Loading...</p>`
 };
 
 const updateResults = (event) => {
@@ -19,8 +14,7 @@ const updateResults = (event) => {
   const main = document.getElementById('main');
   const status = document.getElementById('search-status');
   main.textContent = '';
-  status.textContent = '';
-  appendSpinner(status);
+  status.innerHTML = `<p>Loading...</p>`
   queryWithFilters().then(response => {
     appendChildText(status, `Found ${response.results.bindings.length} results.`);
     response.results.bindings.map((entry) => main.appendChild(toGalleryEntry(entry)));
@@ -30,7 +24,11 @@ const updateResults = (event) => {
   return false;
 }
 
-document.getElementById('form').addEventListener("submit", updateResults);
-prepareFilters();
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+const initializeTooltips = () => {
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+};
+
+document.getElementById('form').addEventListener("click", updateResults);
+initializeFilters();
+initializeTooltips();

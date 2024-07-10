@@ -1,4 +1,5 @@
 import {queryDispatcher} from "./wikidata-client.js";
+import {currentFilter} from "./filters.js";
 
 export const mapping = {
   "ecologicalType": {
@@ -101,8 +102,4 @@ const sparqlQuery = (params) =>
   }
   GROUP BY  ?itemLabel ?item`;
 
-export const getParams = () => Object.fromEntries(Object.entries(mapping)
-  .map(param => [param[0], document.getElementById(param[0])?.value])
-  .filter(param => param[1]));
-
-export const queryWithFilters = () => queryDispatcher.query(sparqlQuery(getParams()));
+export const queryWithFilters = () => queryDispatcher.query(sparqlQuery(currentFilter));

@@ -1,29 +1,37 @@
 import {mapping} from "./mushroom-query.js";
 
-export const prepareFilters = () => Object.entries(mapping).forEach(
-  entry => {
-    const select = document.getElementById(entry[0]);
-    if (select) {
-      const options = Object.entries(entry[1])
-        .map(option =>
-          `<div id="${option[0]}" class="col"><a href="#">
-            <img class="img-thumbnail" src="img/${option[0]}_icon.png" width="100px" alt="${option[0]}"
-                data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="${option[0]}"/>
-           </a></div>`
+export const currentFilter = {}
+export const initializeFilters = () => Object.entries(mapping).forEach(
+  filter => {
+    const filterName = filter[0];
+    const filterContainer = document.getElementById(filterName);
+    if (filterContainer) {
+      const options = Object.entries(filter[1])
+        .map(option => {
+          const optionName = option[0];
+          return `<div class="col"><a href="#">
+            <img class="img-thumbnail" src="img/${optionName}_icon.png" width="100px" alt="${optionName}" id="${filterName}-option-${optionName}"
+                data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="${optionName}"/>
+           </a></div>`;
+          }
         )
         .join('');
 
-      select.innerHTML = `
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="${entry[0]}-button">${entry[0]}</button>
+      filterContainer.innerHTML = `
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="${filterName}-button">${filterName}</button>
       <div class="dropdown-menu">
         <div class="row row-cols-2">${options}</div>
       </div>
   `
-      select.addEventListener("hide.bs.dropdown", (event) => {
-        const parent = event.clickEvent.srcElement.parentElement;
-        const id = parent.id ? parent.id : parent.parentElement.id;
-        document.getElementById(`${entry[0]}-button`).innerHTML =
-          `<img class="img-thumbnail" src="img/${id}_icon.png" width="100px" alt="${id}"/>`;
+      filterContainer.addEventListener("hide.bs.dropdown", (event) => {
+        const element = event.clickEvent?.srcElement;
+        if (!element || !element.id.startsWith(`${filterName}-option`)) {
+          return;
+        }
+        const optionName = element.alt;
+        document.getElementById(`${filterName}-button`).innerHTML =
+          `<img class="img-thumbnail" src="img/${optionName}_icon.png" width="100px" alt="${optionName}"/>`;
+        currentFilter[filterName] = optionName;
       });
     }
   }
