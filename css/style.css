@@ -23,18 +23,18 @@
   padding: 0px 10px;
 }
 
-div.gallery {
+a.gallery {
   padding: 0 6px;
   float: left;
   width: 24.99999%;
   border: 1px solid #ccc;
 }
 
-div.gallery:hover {
+a.gallery:hover {
   border: 1px solid #777;
 }
 
-div.gallery img {
+a.gallery img {
   width: 100%;
   height: auto;
 }
