@@ -48,22 +48,26 @@ export const updateResults = (event) => {
     "ecologicalType": document.getElementById('ecological-type').value
   };
   const main = document.getElementById('main');
-  main.textContent = '';
-  queryDispatcher.query(sparqlQuery(params)).then(response =>
+  main.textContent = "";
+  const loadingText = document.createElement("div");
+  loadingText.textContent = "Loading...";
+  main.appendChild(loadingText);
+  queryDispatcher.query(sparqlQuery(params)).then(response => {
     response.results.bindings.map((entry) => {
       const displayEntry = document.createElement("div");
-      displayEntry.textContent = entry.itemLabel.value;
+      displayEntry.className = 'gallery';
       const image = document.createElement("img");
       image.src = entry.itemImageSample.value;
-      image.className = 'image';
       displayEntry.appendChild(image);
+      const description = document.createElement("div");
+      description.className = 'desc';
+      description.textContent = entry.itemLabel.value;
+      displayEntry.appendChild(description);
       main.appendChild(displayEntry);
-    }));
+    });
+    main.removeChild(main.firstChild);
+  });
   return false;
 }
 
-function init() {
-  document.getElementById('form').addEventListener("submit", updateResults);
-}
-
-window.onload = init;
+document.getElementById('form').addEventListener("submit", updateResults);
