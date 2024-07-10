@@ -1,5 +1,6 @@
 import {queryWithFilters} from "./mushroom-query.js";
 import {toGalleryEntry} from "./gallery-helper.js";
+import {prepareFilters} from "./filters.js";
 
 const appendChildText = (main, text) => {
   const loadingText = document.createElement("p");
@@ -30,3 +31,4 @@ const updateResults = (event) => {
 }
 
 document.getElementById('form').addEventListener("submit", updateResults);
+prepareFilters();
