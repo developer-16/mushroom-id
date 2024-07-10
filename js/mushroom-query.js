@@ -1,6 +1,6 @@
 import {queryDispatcher} from "./wikidata-client.js";
 
-const mapping = {
+export const mapping = {
   "ecologicalType": {
     "saprotrophic": "Q114750",
     "mycorrhizal": "Q99974",
