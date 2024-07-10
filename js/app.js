@@ -16,8 +16,7 @@ const queryDispatcher = new SPARQLQueryDispatcher(endpointUrl);
 
 const sparqlQuery = (params) =>
   `SELECT DISTINCT ?itemLabel ?item (SAMPLE(?itemImage) AS ?itemImageSample) WHERE {
-    ?item p:P171 ?statement0.
-    ?statement0 (ps:P171/(wdt:P171*)) wd:Q27720.
+    ?item p:P171/(ps:P171/(wdt:P171*)) wd:Q27720.
     OPTIONAL {  ?item wdt:P18 ?itemImage. }
     ${params.ecologicalType ? `?item p:P788/(ps:P788/(wdt:P279*)) wd:${mapping.ecologicalType[params.ecologicalType]}.` : ""}
     ${params.stipeCharacter ? `?item p:P786/(ps:P786/(wdt:P279*)) wd:${mapping.stipeCharacter[params.stipeCharacter]}.` : ""}
