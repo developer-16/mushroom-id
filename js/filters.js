@@ -1,6 +1,7 @@
 import {mapping} from "./mushroom-query.js";
 
 export const currentFilter = {}
+
 export const initializeFilters = () => Object.entries(mapping).forEach(
   filter => {
     const filterName = filter[0];

@@ -8,9 +8,7 @@ const appendChildText = (main, text) => {
   main.appendChild(loadingText);
 };
 
-const updateResults = (event) => {
-  event.preventDefault();
-
+const search = () => {
   const main = document.getElementById('main');
   const status = document.getElementById('search-status');
   main.textContent = '';
@@ -20,8 +18,6 @@ const updateResults = (event) => {
     response.results.bindings.map((entry) => main.appendChild(toGalleryEntry(entry)));
     status.removeChild(status.firstChild);
   });
-
-  return false;
 }
 
 const initializeTooltips = () => {
@@ -29,6 +25,6 @@ const initializeTooltips = () => {
   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 };
 
-document.getElementById('form').addEventListener("click", updateResults);
+document.getElementById('form').addEventListener("click", search);
 initializeFilters();
 initializeTooltips();

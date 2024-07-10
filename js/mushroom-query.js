@@ -89,7 +89,7 @@ export const mapping = {
 
 const sparqlQuery = (params) =>
   `SELECT DISTINCT ?itemLabel ?item (SAMPLE(?itemImage) AS ?itemImageSample) WHERE {
-    ?item p:P171/(ps:P171/(wdt:P171*)) wd:Q27720.
+    ?item (wdt:P171*) wd:Q27720.
     OPTIONAL { ?item wdt:P18 ?itemImage. }
     ${params.hymeniumType ? `?item p:P783/(ps:P783/(wdt:P279*)) wd:${mapping.hymeniumType[params.hymeniumType]}.` : ""}
     ${params.capShape ? `?item p:P784/(ps:P784/(wdt:P279*)) wd:${mapping.capShape[params.capShape]}.` : ""}
