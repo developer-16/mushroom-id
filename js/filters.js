@@ -6,7 +6,10 @@ export const prepareFilters = () => Object.entries(mapping).forEach(
     if (select) {
       const options = Object.entries(entry[1])
         .map(option =>
-          `<li id="${option[0]}"><a href="#"><img src="img/${option[0]}_icon.png" width="100px" alt="${option[0]}"/>${option[0]}</a></li>`
+          `<li id="${option[0]}"><a href="#">
+            <img class="img-thumbnail" src="img/${option[0]}_icon.png" width="100px" alt="${option[0]}"
+                data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="${option[0]}"/>
+           </a></li>`
         )
         .join('');
 
@@ -17,7 +20,8 @@ export const prepareFilters = () => Object.entries(mapping).forEach(
       select.addEventListener("hide.bs.dropdown", (event) => {
         const parent = event.clickEvent.srcElement.parentElement;
         const id = parent.id ? parent.id : parent.parentElement.id;
-        document.getElementById(`${entry[0]}-button`).innerHTML = `<img src="img/${id}_icon.png" width="100px" alt="${id}"/>`;
+        document.getElementById(`${entry[0]}-button`).innerHTML =
+          `<img class="img-thumbnail"  src="img/${id}_icon.png" width="100px" alt="${id}"/>`;
       });
     }
   }
