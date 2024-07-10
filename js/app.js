@@ -7,25 +7,23 @@ const appendChildText = (main, text) => {
   main.appendChild(loadingText);
 };
 
-const appendSpinner = (main) => {
-  main.innerHTML =
-    `<div class="justify-content-center">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-     </div>`
+const appendSpinner = (element) => {
+  element.innerHTML =
+    `<p>Loading...</p>`
 };
 
 const updateResults = (event) => {
   event.preventDefault();
 
   const main = document.getElementById('main');
-  main.textContent = "";
-  appendSpinner(main);
+  const status = document.getElementById('search-status');
+  main.textContent = '';
+  status.textContent = '';
+  appendSpinner(status);
   queryWithFilters().then(response => {
-    appendChildText(main, `Found ${response.results.bindings.length} results.`);
+    appendChildText(status, `Found ${response.results.bindings.length} results.`);
     response.results.bindings.map((entry) => main.appendChild(toGalleryEntry(entry)));
-    main.removeChild(main.firstChild);
+    status.removeChild(status.firstChild);
   });
 
   return false;

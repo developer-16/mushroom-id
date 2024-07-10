@@ -27,10 +27,10 @@
 </head>
 
 <body>
-<div class="container-fluid mt-5">
-  <div class="fixed-top mt-5" style="width: 280px;">
+<div class="container-fluid pt-3">
+  <div class="bg-light fixed-top p-3" style="width: 280px; height: 100%">
     <form id="form">
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="ecologicalType">
           <select class="form-select" id="ecologicalType">
             <option value="">Select ecological type:</option>
@@ -40,7 +40,7 @@
           </select>
         </label>
       </div>
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="stipeCharacter">
           <select class="form-select" id="stipeCharacter">
             <option value="">Select stipe character:</option>
@@ -52,7 +52,7 @@
           </select>
         </label>
       </div>
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="hymeniumType">
           <select class="form-select" id="hymeniumType">
             <option value="">Select hymenium type:</option>
@@ -65,7 +65,7 @@
           </select>
         </label>
       </div>
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="capShape">
           <select class="form-select" id="capShape">
             <option value="">Select cap shape:</option>
@@ -85,7 +85,7 @@
           </select>
         </label>
       </div>
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="whichGills">
           <select class="form-select" id="whichGills">
             <option value="">Select the way gills are connected to the stipe:</option>
@@ -101,7 +101,7 @@
           </select>
         </label>
       </div>
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="sporePrintColor">
           <select class="form-select" id="sporePrintColor">
             <option value="">Select the spore print color:</option>
@@ -130,13 +130,18 @@
           </select>
         </label>
       </div>
-      <div class="mb-3">
+      <div class="mb-2">
         <button type="submit" class="btn btn-primary">Find</button>
       </div>
     </form>
   </div>
-  <div class="row row-cols-2 gap-3 text-center" id="main" style="margin-left: 280px;">
-    <p>Hello world! Mushrooms will be here.</p>
+  <div style="margin-left: 280px;">
+    <div class="row" id="search-status">
+      <p>Apply some filters and press 'Find'</p>
+    </div>
+    <hr>
+    <div class="row row-cols-4 text-center" id="main">
+    </div>
   </div>
 </div>
 
