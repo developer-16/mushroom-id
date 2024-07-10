@@ -1,12 +1,14 @@
-const path = require('path');
+import path from "path";
 
-module.exports = {
+const common = {
   entry: {
     app: './js/app.js',
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(import.meta.dirname, 'dist'),
     clean: true,
     filename: './js/app.js',
   },
 };
+
+export default common;

@@ -1,7 +1,7 @@
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common.js');
+import common from "./webpack.common.js";
 
-module.exports = merge(common, {
+const config = {
+  ...common,
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
@@ -10,4 +10,6 @@ module.exports = merge(common, {
     open: true,
     static: ['./'],
   },
-});
+}
+
+export default config;
