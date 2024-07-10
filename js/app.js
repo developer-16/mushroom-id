@@ -14,8 +14,8 @@ const search = () => {
   main.textContent = '';
   status.innerHTML = `<p>Loading...</p>`
   queryWithFilters().then(response => {
-    appendChildText(status, `Found ${response.results.bindings.length} results.`);
-    response.results.bindings.map((entry) => main.appendChild(toGalleryEntry(entry)));
+    appendChildText(status, `Found ${response.total} results.`);
+    response.results.map((entry) => main.appendChild(toGalleryEntry(entry)));
     status.removeChild(status.firstChild);
   });
 }

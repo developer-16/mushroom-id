@@ -87,8 +87,18 @@ export const mapping = {
   },
 }
 
-const sparqlQuery = (params) =>
-  `SELECT DISTINCT ?itemLabel ?item (SAMPLE(?itemImage) AS ?itemImageSample) WHERE {
+const pageQuery = (params) =>
+  `SELECT DISTINCT ?itemLabel ?item (SAMPLE(?itemImage) AS ?itemImageSample)
+  ${filter(params)}
+  GROUP BY ?itemLabel ?item
+  LIMIT 20`;
+
+const countQuery = (params) =>
+  `SELECT (COUNT(*) AS ?count)
+  ${filter(params)}`;
+
+const filter = (params) =>
+  `WHERE {
     ?item (wdt:P171*) wd:Q27720.
     OPTIONAL { ?item wdt:P18 ?itemImage. }
     ${params.hymeniumType ? `?item p:P783/(ps:P783/(wdt:P279*)) wd:${mapping.hymeniumType[params.hymeniumType]}.` : ""}
@@ -99,7 +109,13 @@ const sparqlQuery = (params) =>
     ${params.ecologicalType ? `?item p:P788/(ps:P788/(wdt:P279*)) wd:${mapping.ecologicalType[params.ecologicalType]}.` : ""}
     ${params.howEdible ? `?item p:P789/(ps:P789/(wdt:P279*)) wd:${mapping.howEdible[params.howEdible]}.` : ""}
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-  }
-  GROUP BY  ?itemLabel ?item`;
+  }`;
 
-export const queryWithFilters = () => queryDispatcher.query(sparqlQuery(currentFilter));
+export const queryWithFilters = () => {
+  const page = queryDispatcher.query(pageQuery(currentFilter));
+  const count = queryDispatcher.query(countQuery(currentFilter));
+  return Promise.all([page, count]).then(promises => ({
+    "results": promises[0].results.bindings,
+    "total": promises[1].results.bindings[0].count.value,
+  }))
+}
