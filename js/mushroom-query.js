@@ -11,7 +11,7 @@ export const mapping = {
     "bare": "Q14544581",
     "ring": "Q14544582",
     "volva": "Q19887985",
-    "ring and volva": "Q19887987",
+    "ring-and-volva": "Q19887987",
     "cortina": "Q19887988",
   },
   "hymeniumType": {
@@ -34,7 +34,7 @@ export const mapping = {
     "umbilicate": "Q19887962",
     "umbonate": "Q19887964",
     "no": "Q19887965",
-    "concave to plane": "Q23058598",
+    "concave-to-plane": "Q23058598",
     "semi-spherical": "Q62023127",
   },
   "whichGills": {
