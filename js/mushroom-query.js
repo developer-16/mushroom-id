@@ -34,7 +34,7 @@ export const mapping = {
     "ovate": "Q19887961",
     "umbilicate": "Q19887962",
     "umbonate": "Q19887964",
-    "no": "Q19887965",
+    "no-cap": "Q19887965",
     "concave-to-plane": "Q23058598",
     "semi-spherical": "Q62023127",
   },
@@ -47,7 +47,7 @@ export const mapping = {
     "seceding": "Q19887929",
     "sinuate": "Q19887930",
     "subdecurrent": "Q19887931",
-    "no": "Q19887932",
+    "no-gills": "Q19887932",
   },
   "sporePrintColor": {
     "black": "Q23445",
