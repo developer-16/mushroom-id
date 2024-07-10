@@ -123,24 +123,22 @@ export function toGalleryEntry(entry) {
   return displayEntry;
 }
 
-const getParams = () => ({
-  "ecologicalType": document.getElementById('ecological-type').value,
-  "stipeCharacter": document.getElementById('stipe-character').value,
-  "hymeniumType": document.getElementById('hymenium-type').value,
-  "capShape": document.getElementById('cap-shape').value,
-});
+export const getParams = () => Object.fromEntries(Object.entries(mapping)
+  .map(param => [param[0], document.getElementById(param[0])?.value])
+  .filter(param => param[1]));
 
 export const updateResults = (event) => {
   event.preventDefault();
-  const params = getParams();
+
   const main = document.getElementById('main');
   main.textContent = "";
   appendChildText(main, "Loading...");
-  queryDispatcher.query(sparqlQuery(params)).then(response => {
+  queryDispatcher.query(sparqlQuery(getParams())).then(response => {
     appendChildText(main, `Found ${response.results.bindings.length} results.`);
     response.results.bindings.map((entry) => main.appendChild(toGalleryEntry(entry)));
     main.removeChild(main.firstChild);
   });
+
   return false;
 }
 
