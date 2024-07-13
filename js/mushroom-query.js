@@ -99,7 +99,7 @@ const countQuery = (params) =>
 
 const filter = (params) =>
   `WHERE {
-    ?item (wdt:P171*) wd:Q27720.
+    ?item wdt:P31 wd:Q16521.
     OPTIONAL { ?item wdt:P18 ?itemImage. }
     ${params.hymeniumType ? `?item p:P783/(ps:P783/(wdt:P279*)) wd:${mapping.hymeniumType[params.hymeniumType]}.` : ""}
     ${params.capShape ? `?item p:P784/(ps:P784/(wdt:P279*)) wd:${mapping.capShape[params.capShape]}.` : ""}

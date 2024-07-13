@@ -1,7 +1,5 @@
 - Show species info on hover
 - Add text field search by tags
 - Add taxon filtration
-- Figure out whether the request to wikidata can be optimised
-- Use images for filtration parameters
 - Add pagination
 - Load images lazily
