@@ -1,5 +1,15 @@
 - Show species info on hover
-- Add text field search by tags
 - Add taxon filtration
 - Add pagination
 - Load images lazily
+- Fix the mismatch with the total number of results
+- Make the UI mobile friendly (allow to hide and scroll sidebar, resize filter icons)
+- Display human-readable filter names
+- Add localisations
+### Long term
+- Add text field search by tags
+- Allow to select several options in a filter
+- Add more filtration parameters
+- Make existing filtration parameters more user-friendly ('where it grows' instead of 'ecology')
+- Add more data sources (wikipedia, inaturalist, firstnature, mushroomexpert)
+- Visual filters with a mushroom constructor (a la character creation in games)
