@@ -6,6 +6,7 @@
 - Make the UI mobile friendly (allow to hide and scroll sidebar, resize filter icons)
 - Display human-readable filter names
 - Add localisations
+- Fix empty search not working
 ### Long term
 - Add text field search by tags
 - Allow to select several options in a filter

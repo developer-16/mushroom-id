@@ -29,25 +29,26 @@
 </head>
 
 <body>
-<div class="container-fluid pt-3">
-  <div class="bg-light fixed-top p-3" style="width: 200px; height: 100%">
-    <div class="dropend mb-2" id="ecologicalType"></div>
-    <div class="dropend mb-2" id="stipeCharacter"></div>
-    <div class="dropend mb-2" id="hymeniumType"></div>
-    <div class="dropend mb-2" id="capShape"></div>
-    <div class="dropend mb-2" id="whichGills"></div>
-    <div class="dropend mb-2" id="sporePrintColor"></div>
-    <div class="mb-2">
-      <button type="submit" class="btn btn-primary" id="form">Find</button>
+<nav class="navbar bg-light fixed-top">
+  <div class="container-fluid">
+    <div class="offcanvas offcanvas-end p-3" data-bs-scroll="true" tabindex="-1" id="filters">
+      <div class="dropstart btn mb-2" id="ecologicalType"></div>
+      <div class="dropstart btn mb-2" id="stipeCharacter"></div>
+      <div class="dropstart btn mb-2" id="hymeniumType"></div>
+      <div class="dropstart btn mb-2" id="capShape"></div>
+      <div class="dropstart btn mb-2" id="whichGills"></div>
+      <div class="btn dropstart mb-2" id="sporePrintColor"></div>
+      <button type="submit" class="btn btn-outline-success" id="form">Search</button>
     </div>
+    <a class="navbar-brand">Mushroom ID</a>
+    <div id="search-status">Apply some filters and press 'Search'</div>
+    <button class="btn me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#filters"
+            aria-controls="filters">Filters
+    </button>
   </div>
-  <div style="margin-left: 200px;">
-    <div class="row" id="search-status">
-      <p>Apply some filters and press 'Find'</p>
-    </div>
-    <hr>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 text-center" id="main">
-    </div>
+</nav>
+<div class="container-fluid pt-5 mt-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 text-center" id="main">
   </div>
 </div>
 

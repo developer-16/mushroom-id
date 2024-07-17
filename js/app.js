@@ -2,21 +2,14 @@ import {queryWithFilters} from "./mushroom-query.js";
 import {toGalleryEntry} from "./gallery-helper.js";
 import {initializeFilters} from "./filters.js";
 
-const appendChildText = (main, text) => {
-  const loadingText = document.createElement("p");
-  loadingText.textContent = text;
-  main.appendChild(loadingText);
-};
-
 const search = () => {
   const main = document.getElementById('main');
   const status = document.getElementById('search-status');
   main.textContent = '';
-  status.innerHTML = `<p>Loading...</p>`
+  status.innerHTML = `Loading...`
   queryWithFilters().then(response => {
-    appendChildText(status, `Found ${response.total} results.`);
     response.results.map((entry) => main.appendChild(toGalleryEntry(entry)));
-    status.removeChild(status.firstChild);
+    status.innerHTML = `Found ${response.total} results.`
   });
 }
 
