@@ -2,15 +2,24 @@ import {queryWithFilters} from "./mushroom-query.js";
 import {toGalleryEntry} from "./gallery-helper.js";
 import {initializeFilters} from "./filters.js";
 
-const search = () => {
+const search = (event) => {
+  event.preventDefault();
+
+  const currentFilter = {};
+  Array.from(event.srcElement.elements)
+    .filter(e => e.checked)
+    .forEach(e => currentFilter[e.name] = e.value !== 'unknown' ? e.value : undefined);
+
   const main = document.getElementById('main');
   const status = document.getElementById('search-status');
   main.textContent = '';
   status.innerHTML = `Loading...`
-  queryWithFilters().then(response => {
+  queryWithFilters(currentFilter).then(response => {
     response.results.map((entry) => main.appendChild(toGalleryEntry(entry)));
     status.innerHTML = `Found ${response.total} results.`
   });
+
+  return false;
 }
 
 const initializeTooltips = () => {
@@ -18,6 +27,6 @@ const initializeTooltips = () => {
   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 };
 
-document.getElementById('form').addEventListener("click", search);
+document.getElementById('form').addEventListener("submit", search);
 initializeFilters();
 initializeTooltips();

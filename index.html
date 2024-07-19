@@ -31,14 +31,16 @@
 <body>
 <nav class="navbar bg-light fixed-top">
   <div class="container-fluid">
-    <div class="offcanvas offcanvas-end p-3" data-bs-scroll="true" tabindex="-1" id="filters">
-      <div class="dropstart btn mb-2" id="ecologicalType"></div>
-      <div class="dropstart btn mb-2" id="stipeCharacter"></div>
-      <div class="dropstart btn mb-2" id="hymeniumType"></div>
-      <div class="dropstart btn mb-2" id="capShape"></div>
-      <div class="dropstart btn mb-2" id="whichGills"></div>
-      <div class="btn dropstart mb-2" id="sporePrintColor"></div>
-      <button type="submit" class="btn btn-outline-success" id="form">Search</button>
+    <div class="offcanvas offcanvas-end overflow-scroll p-3" data-bs-scroll="true" tabindex="-1" id="filters">
+      <form id="form">
+        <div id="ecologicalType"></div>
+        <div id="stipeCharacter"></div>
+        <div id="hymeniumType"></div>
+        <div id="capShape"></div>
+        <div id="whichGills"></div>
+        <div id="sporePrintColor"></div>
+        <button type="submit" class="btn btn-outline-success">Search</button>
+      </form>
     </div>
     <a class="navbar-brand">Mushroom ID</a>
     <div id="search-status">Apply some filters and press 'Search'</div>
@@ -48,8 +50,7 @@
   </div>
 </nav>
 <div class="container-fluid pt-5 mt-4">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 text-center" id="main">
-  </div>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 text-center" id="main"></div>
 </div>
 
 </body>

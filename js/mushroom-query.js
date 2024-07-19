@@ -1,5 +1,4 @@
 import {queryDispatcher} from "./wikidata-client.js";
-import {currentFilter} from "./filters.js";
 
 export const mapping = {
   "ecologicalType": {
@@ -111,7 +110,7 @@ const filter = (params) =>
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
   }`;
 
-export const queryWithFilters = () => {
+export const queryWithFilters = (currentFilter) => {
   const page = queryDispatcher.query(pageQuery(currentFilter));
   const count = queryDispatcher.query(countQuery(currentFilter));
   return Promise.all([page, count]).then(promises => ({
