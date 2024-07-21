@@ -31,21 +31,21 @@
 <body>
 <nav class="navbar bg-light fixed-top">
   <div class="container-fluid">
-    <div class="offcanvas offcanvas-end overflow-scroll p-3" data-bs-scroll="true" tabindex="-1" id="filters">
-      <form id="form">
+    <div class="offcanvas offcanvas-end overflow-auto" data-bs-scroll="true" tabindex="-1" id="filters">
+      <form id="form" class="form-check form-check-inline mt-3">
         <div id="ecologicalType"></div>
         <div id="stipeCharacter"></div>
         <div id="hymeniumType"></div>
         <div id="capShape"></div>
         <div id="whichGills"></div>
         <div id="sporePrintColor"></div>
-        <button type="submit" class="btn btn-outline-success">Search</button>
+        <button type="submit" class="btn btn-outline-success mb-3">Search</button>
       </form>
     </div>
     <a class="navbar-brand">Mushroom ID</a>
-    <div id="search-status">Apply some filters and press 'Search'</div>
-    <button class="btn me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#filters"
-            aria-controls="filters">Filters
+    <div class="navbar-text" id="search-status">Apply some filters and press 'Search'</div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#filters"
+            aria-controls="filters">Filters<span class="navbar-toggler-icon ms-2"></span>
     </button>
   </div>
 </nav>

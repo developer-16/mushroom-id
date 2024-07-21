@@ -10,18 +10,20 @@ export const initializeFilters = () => Object.entries(mapping).forEach(
         .map(option => {
             const optionName = option[0];
             return `
-            <div class="form-check">
               <input class="btn-check" type="radio" name="${filterName}" value="${optionName}" id="${filterName}-option-${optionName}">
-              <label class="btn" for="${filterName}-option-${optionName}">
-                <img class="img-thumbnail" src="img/${optionName}_icon.png" width="100px" alt="${optionName}"/>
+              <label class="btn p-0" for="${filterName}-option-${optionName}">
+                <img class="img-thumbnail" src="img/${optionName}_icon.png" width="80px" alt="${optionName}"
+                    data-bs-toggle="tooltip" data-bs-title="${optionName}"/>
               </label>
-            </div>
             `;
           }
         )
         .join('');
 
-      filterContainer.innerHTML = `<div class="row row-cols-2">${options}</div>`;
+      filterContainer.innerHTML = `
+          <label class="form-label">${filterName}</label>
+          <div class="mb-3">${options}</div>
+      `;
     }
   }
 )
