@@ -7,7 +7,7 @@
 - Fix empty search not working
 - Fix additional scrollbar appearing momentarily
 - Move the search button to the navbar?
-- Tooltips are not working for mobile
+- Add 'cortina' option properly
 ### Long term
 - Add text field search by tags
 - Allow to select several options in a filter

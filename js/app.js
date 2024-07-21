@@ -1,6 +1,7 @@
 import {queryWithFilters} from "./mushroom-query.js";
 import {toGalleryEntry} from "./gallery-helper.js";
 import {initializeFilters} from "./filters.js";
+import {login, run} from "./mongodb-client.js";
 
 const search = (event) => {
   event.preventDefault();
@@ -18,6 +19,7 @@ const search = (event) => {
     response.results.map((entry) => main.appendChild(toGalleryEntry(entry)));
     status.innerHTML = `Found ${response.total} results.`
   });
+  run(currentFilter).catch(console.dir);
 
   return false;
 }
@@ -30,3 +32,4 @@ const initializeTooltips = () => {
 document.getElementById('form').addEventListener("submit", search);
 initializeFilters();
 initializeTooltips();
+login().catch(console.dir);
