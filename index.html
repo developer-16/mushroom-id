@@ -32,18 +32,23 @@
 <nav class="navbar bg-light fixed-top">
   <div class="container-fluid">
     <div class="offcanvas offcanvas-end overflow-auto" data-bs-scroll="true" tabindex="-1" id="filters">
-      <form id="form" class="form-check form-check-inline mt-3">
+      <form id="form" class="form-check form-check-inline">
+        <div class="d-flex justify-content-between p-2 sticky-top bg-white">
+          <button type="submit" class="btn btn-outline-secondary" data-bs-dismiss="offcanvas">Search</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="offcanvas" aria-label="Close">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
         <div id="ecologicalType"></div>
         <div id="stipeCharacter"></div>
         <div id="hymeniumType"></div>
         <div id="capShape"></div>
         <div id="whichGills"></div>
         <div id="sporePrintColor"></div>
-        <button type="submit" class="btn btn-outline-success mb-3">Search</button>
       </form>
     </div>
     <a class="navbar-brand">Mushroom ID</a>
-    <div class="navbar-text" id="search-status">Apply some filters and press 'Search'</div>
+    <div class="navbar-text" id="search-status"></div>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#filters"
             aria-controls="filters">Filters<span class="navbar-toggler-icon ms-2"></span>
     </button>
