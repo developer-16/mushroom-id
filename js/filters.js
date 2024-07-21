@@ -1,27 +1,24 @@
-import {mapping} from "./mushroom-query.js";
+import {parameters} from "./parameters.js";
 
-export const initializeFilters = () => Object.entries(mapping).forEach(
+export const initializeFilters = () => Object.entries(parameters).forEach(
   filter => {
     const filterName = filter[0];
     const filterContainer = document.getElementById(filterName);
-    filter[1].unknown = undefined;
+    filter[1].options.push("unknown")
     if (filterContainer) {
-      const options = Object.entries(filter[1])
-        .map(option => {
-            const optionName = option[0];
-            return `
-              <input class="btn-check" type="radio" name="${filterName}" value="${optionName}" id="${filterName}-option-${optionName}">
-              <label class="btn p-0" for="${filterName}-option-${optionName}">
-                <img class="img-thumbnail" src="img/${optionName}_icon.png" width="80px" alt="${optionName}"
-                    data-bs-toggle="tooltip" data-bs-title="${optionName}"/>
+      const options = filter[1].options.map(option => {
+          return `
+              <input class="btn-check" type="radio" name="${filterName}" value="${option}" id="${filterName}-option-${option}">
+              <label class="btn p-0" for="${filterName}-option-${option}">
+                <img class="img-thumbnail" src="img/${option}_icon.png" width="80px" alt="${option}"
+                    data-bs-toggle="tooltip" data-bs-title="${option}"/>
               </label>
             `;
-          }
-        )
-        .join('');
+        }
+      ).join('');
 
       filterContainer.innerHTML = `
-          <label class="form-label">${filterName}</label>
+          <label class="form-label">${filter[1].name}</label>
           <div class="mb-3">${options}</div>
       `;
     }

@@ -3,7 +3,6 @@
 - Add pagination
 - Load images lazily
 - Fix the mismatch with the total number of results
-- Display human-readable filter names
 - Add localisations
 - Fix empty search not working
 - Fix additional scrollbar appearing momentarily
