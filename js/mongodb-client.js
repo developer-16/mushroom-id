@@ -13,19 +13,13 @@ export const login = async () => {
   }
 };
 
-export const run = async (currentFilter) => {
-  let collection;
-  try {
-    const mongodb = app.currentUser.mongoClient(ATLAS_SERVICE);
-    collection = mongodb.db("fungi").collection("mushrooms");
-  } catch (err) {
-    console.error("Need to log in first", err);
-    return;
-  }
-
+const prepareFilter = currentFilter => {
   const filter = {};
   if (currentFilter.hymeniumType) {
     filter["hymenium.type"] = currentFilter.hymeniumType
+    if (currentFilter.hymeniumType === "gills") {
+      filter["hymenium.type"] = "lamella"
+    }
   }
   if (currentFilter.capShape) {
     filter["cap.shape"] = currentFilter.capShape
@@ -70,6 +64,31 @@ export const run = async (currentFilter) => {
   if (currentFilter.ecologicalType) {
     filter["ecology"] = currentFilter.ecologicalType
   }
-  const mushrooms = await collection.find(filter, {limit: 20});
-  console.log(mushrooms)
+  return filter;
+};
+
+export const getResults = async (currentFilter) => {
+  let collection;
+  try {
+    const mongodb = app.currentUser.mongoClient(ATLAS_SERVICE);
+    collection = mongodb.db("fungi").collection("mushrooms");
+  } catch (err) {
+    console.error("Need to log in first", err);
+    return;
+  }
+  const filter = prepareFilter(currentFilter);
+  return collection.find(filter, {limit: 20});
+};
+
+export const getCount = async (currentFilter) => {
+  let collection;
+  try {
+    const mongodb = app.currentUser.mongoClient(ATLAS_SERVICE);
+    collection = mongodb.db("fungi").collection("mushrooms");
+  } catch (err) {
+    console.error("Need to log in first", err);
+    return;
+  }
+  const filter = prepareFilter(currentFilter);
+  return collection.count(filter);
 };

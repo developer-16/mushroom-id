@@ -1,28 +1,50 @@
-import {queryWithFilters} from "./mushroom-query.js";
 import {toGalleryEntry} from "./gallery-helper.js";
 import {initializeFilters} from "./filters.js";
-import {login, run} from "./mongodb-client.js";
+import {getCount, getResults, login} from "./mongodb-client.js";
 
 const search = (event) => {
   event.preventDefault();
 
-  const currentFilter = {};
-  Array.from(event.srcElement.elements)
-    .filter(e => e.checked)
-    .forEach(e => currentFilter[e.name] = e.value !== 'unknown' ? e.value : undefined);
+  const currentFilter = getCurrentFilter();
 
   const main = document.getElementById('main');
   const status = document.getElementById('search-status');
   main.textContent = '';
-  status.innerHTML = `Loading...`
-  queryWithFilters(currentFilter).then(response => {
-    response.results.map((entry) => main.appendChild(toGalleryEntry(entry)));
-    status.innerHTML = `Found ${response.total} results.`
+  getResults(currentFilter).then(response => {
+    response.map((entry) => main.appendChild(toGalleryEntry(entry)));
   });
-  run(currentFilter).catch(console.dir);
+  status.innerHTML = `Loading...`
+  getCount(currentFilter).then(response => {
+    status.innerHTML = `Found ${response} results.`
+  });
 
   return false;
 }
+
+const count = (event) => {
+  if (event.target.type !== 'radio' && (event.target.type !== 'reset')) {
+    return;
+  }
+
+  setTimeout(
+    () => {
+      const currentFilter = getCurrentFilter();
+
+      const showButton = document.getElementById('show-button');
+      getCount(currentFilter).then(response => {
+        showButton.innerHTML = `Show ${response} matches`
+      });
+    }, 1
+  )
+}
+
+const getCurrentFilter = () => {
+  const currentFilter = {};
+  Array.from(document.getElementById('form').elements)
+    .filter(e => e.checked)
+    .forEach(e => currentFilter[e.name] = e.value !== 'unknown' ? e.value : undefined);
+  return currentFilter;
+};
 
 const initializeTooltips = () => {
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -30,6 +52,7 @@ const initializeTooltips = () => {
 };
 
 document.getElementById('form').addEventListener("submit", search);
+document.getElementById('form').addEventListener("click", count);
 initializeFilters();
 initializeTooltips();
 login().catch(console.dir);
