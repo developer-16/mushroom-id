@@ -1,16 +1,19 @@
+- Only call aggregate when needed (not on search)
+- Only call aggregate once
+- Reset lower taxons when higher taxon applied
+
+
 - Show species info on hover
-- Add taxon filtration
 - Add pagination
 - Load images lazily
-- Fix the mismatch with the total number of results
 - Add localisations
-- Fix empty search not working
 - Fix additional scrollbar appearing momentarily
 - Move the search button to the navbar?
 - Add 'cortina' option properly
+- Fix or remove tests
 ### Long term
-- Add text field search by tags
 - Allow to select several options in a filter
+- Add text field search by tags
 - Add more filtration parameters
 - Make existing filtration parameters more user-friendly ('where it grows' instead of 'ecology')
 - Add more data sources (wikipedia, inaturalist, firstnature, mushroomexpert)

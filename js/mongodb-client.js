@@ -64,6 +64,12 @@ const prepareFilter = currentFilter => {
   if (currentFilter.ecologicalType) {
     filter["ecology"] = currentFilter.ecologicalType
   }
+
+  ['division', 'class', 'order', 'family', 'genus']
+    .filter((taxon) => currentFilter[taxon])
+    .forEach((taxon) => {
+      filter[`name.${taxon}`] = currentFilter[taxon]
+    });
   return filter;
 };
 
@@ -91,4 +97,23 @@ export const getCount = async (currentFilter) => {
   }
   const filter = prepareFilter(currentFilter);
   return collection.count(filter);
+};
+
+export const getChildTaxons = async (currentFilter, level) => {
+  let collection;
+  try {
+    const mongodb = app.currentUser.mongoClient(ATLAS_SERVICE);
+    collection = mongodb.db("fungi").collection("mushrooms");
+  } catch (err) {
+    console.error("Need to log in first", err);
+    return;
+  }
+  const filter = prepareFilter(currentFilter);
+  const match = {
+    "$match": filter
+  }
+  const group = {
+    "$group": {_id: `\$${level}`, count: {$sum: 1}}
+  }
+  return collection.aggregate([match, group]);
 };

@@ -1,6 +1,6 @@
 import {toGalleryEntry} from "./gallery-helper.js";
 import {initializeFilters} from "./filters.js";
-import {getCount, getResults, login} from "./mongodb-client.js";
+import {getChildTaxons, getCount, getResults, login} from "./mongodb-client.js";
 
 const search = (event) => {
   event.preventDefault();
@@ -22,7 +22,7 @@ const search = (event) => {
 }
 
 const count = (event) => {
-  if (event.target.type !== 'radio' && (event.target.type !== 'reset')) {
+  if (!['OPTION', 'BUTTON', 'INPUT', 'SELECT'].includes(event.target.tagName)) {
     return;
   }
 
@@ -34,14 +34,30 @@ const count = (event) => {
       getCount(currentFilter).then(response => {
         showButton.innerHTML = `Show ${response} matches`
       });
+      updateTaxonCounts();
     }, 1
   )
 }
 
+const updateTaxonCounts = () => {
+  const filter = getCurrentFilter();
+  ['division', 'class', 'order', 'family', 'genus']
+    .filter((taxon) => !filter[taxon])
+    .forEach((taxon) => {
+      getChildTaxons(filter, `name.${taxon}`).then(response => {
+        document.getElementById(taxon).innerHTML =
+          `<option disabled selected value> -- select the ${taxon} -- </option>` +
+          response
+            .map((entry) => `<option value="${entry._id}">${entry._id}: ${entry.count}</option>`)
+            .join('');
+      });
+    });
+};
+
 const getCurrentFilter = () => {
   const currentFilter = {};
   Array.from(document.getElementById('form').elements)
-    .filter(e => e.checked)
+    .filter(e => e.checked || e.tagName === 'SELECT')
     .forEach(e => currentFilter[e.name] = e.value !== 'unknown' ? e.value : undefined);
   return currentFilter;
 };
@@ -56,3 +72,4 @@ document.getElementById('form').addEventListener("click", count);
 initializeFilters();
 initializeTooltips();
 login().catch(console.dir);
+updateTaxonCounts();

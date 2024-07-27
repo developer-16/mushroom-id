@@ -1,7 +1,7 @@
 export const toGalleryEntry = entry => {
   const displayEntry = document.createElement("div");
 
-  const link = entry.images ? entry.images[0] : "img/icon-image-not-found.jpg";
+  const link = entry.images[0] ? entry.images[0] : "img/icon-image-not-found.jpg";
 
   displayEntry.className = 'col py-1'
   displayEntry.innerHTML =
