@@ -1,0 +1,20 @@
+.card:hover .gallery-image {
+  display: none;
+}
+.card .gallery-image {
+  display: inline;
+}
+.card:hover .gallery-description {
+  display: inline;
+}
+.card .gallery-description {
+  display: none;
+}
+.card {
+  text-decoration: none;
+  color: black;
+}
+.card:hover {
+  text-decoration: none;
+  color: black;
+}

@@ -48,6 +48,7 @@ const updateTaxonCounts = () => {
         document.getElementById(taxon).innerHTML =
           `<option disabled selected value> -- select the ${taxon} -- </option>` +
           response
+            .sort((a, b) => a._id > b._id ? 1 : a._id < b._id ? -1 : 0)
             .map((entry) => `<option value="${entry._id}">${entry._id}: ${entry.count}</option>`)
             .join('');
       });
